@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class UpgradeWeapon : MonoBehaviour
@@ -7,34 +7,42 @@ public class UpgradeWeapon : MonoBehaviour
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI priceText;
 
-    private int level = 0;
-    private int price = 100;
+    public AudioSource audioSource;   // ตัวเล่นเสียง
+    public AudioClip buySound;        // เสียงตอนซื้อ
 
     void Start()
     {
         UpdateUI();
     }
 
-    public void BuyUpgrade()
+    public void Buy()
     {
-        if (GameManager.Instance.SpendCoins(price))
-        {
-            level++;
-            player.damage += 1;
+        var gm = GameManager.Instance;
 
-            price = Mathf.RoundToInt(price * 1.5f);
+        if (gm.SpendCoins(gm.weaponPrice))
+        {
+            gm.weaponLevel++;
+            gm.weaponPrice = Mathf.CeilToInt(gm.weaponPrice * 1.5f);
+
+            gm.SaveGameData();
+
+            player.damage = 1 + gm.weaponLevel;
+
+            // 🔊 เล่นเสียงตอนซื้อ
+            audioSource.PlayOneShot(buySound);
 
             UpdateUI();
-        }
-        else
-        {
-            Debug.Log("Not enough gold!");
         }
     }
 
     void UpdateUI()
     {
-        descriptionText.text = "Upgrade Weapon +" + (level + 1) + " Damage";
-        priceText.text = "Price: " + price + " G";
+        var gm = GameManager.Instance;
+
+        descriptionText.text =
+            "Upgrade Weapon +" + (gm.weaponLevel + 1) + " Damage";
+
+        priceText.text =
+            "Price: " + gm.weaponPrice + " G";
     }
 }

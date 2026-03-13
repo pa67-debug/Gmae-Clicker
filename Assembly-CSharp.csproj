@@ -68,6 +68,7 @@
     <Compile Include="Assets\Cos\UpgradeCriticalDamage.cs" />
     <Compile Include="Assets\Cos\UpgradeWeapon.cs" />
     <Compile Include="Assets\Cos\Dummy.cs" />
+    <Compile Include="Assets\Cos\SoundManager.cs" />
     <Compile Include="Assets\Cos\GameManager.cs" />
     <Compile Include="Assets\Cos\UpgradeCriticalChance.cs" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class UpgradeGoldMultiplier : MonoBehaviour
@@ -6,37 +6,41 @@ public class UpgradeGoldMultiplier : MonoBehaviour
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI priceText;
 
-    private int level = 0;
-    private int price = 3000;
+    public AudioSource audioSource;   // ตัวเล่นเสียง
+    public AudioClip buySound;        // เสียงตอนซื้อ
 
     void Start()
     {
         UpdateUI();
     }
 
-    public void BuyUpgrade()
+    public void Buy()
     {
-        if (GameManager.Instance.SpendCoins(price))
+        var gm = GameManager.Instance;
+
+        if (gm.SpendCoins(gm.goldPrice))
         {
-            level++;
+            gm.goldLevel++;
+            gm.goldMultiplier++;
+            gm.goldPrice *= 3;
 
-            GameManager.Instance.goldMultiplier += 1;
+            gm.SaveGameData();
 
-            price = Mathf.CeilToInt(price * 3f);
+            // 🔊 เล่นเสียงตอนซื้อ
+            audioSource.PlayOneShot(buySound);
 
             UpdateUI();
-        }
-        else
-        {
-            Debug.Log("Not enough gold!");
         }
     }
 
     void UpdateUI()
     {
-        descriptionText.text =
-            "Increase Gold Gain\nCurrent: x" + GameManager.Instance.goldMultiplier;
+        var gm = GameManager.Instance;
 
-        priceText.text = "Price: " + price + " G";
+        descriptionText.text =
+            "Increase Gold Gain x" + gm.goldMultiplier;
+
+        priceText.text =
+            "Price: " + gm.goldPrice + " G";
     }
 }

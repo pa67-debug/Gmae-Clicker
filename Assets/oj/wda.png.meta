@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 98a71d9c729c81547bd6c0434490c00e
+guid: c2b6a4414d1a7394eb1cf036ec688def
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -175,13 +175,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Untitled-adaaaaaa_0
+      name: wda_0
       rect:
         serializedVersion: 2
-        x: 197
-        y: 477
-        width: 806
-        height: 206
+        x: 533
+        y: 730
+        width: 949
+        height: 147
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -189,50 +189,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da2b7d644701ea6499d399064dbcb5ee
-      internalID: 917837524
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Untitled-adaaaaaa_1
-      rect:
-        serializedVersion: 2
-        x: 1396
-        y: 575
-        width: 308
-        height: 309
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a0855001675178d4397b1fa4e8871743
-      internalID: -797225339
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Untitled-adaaaaaa_2
-      rect:
-        serializedVersion: 2
-        x: 197
-        y: 194
-        width: 806
-        height: 206
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: df09413ec37f4b74bb51c249005eefa8
-      internalID: 99315538
+      spriteID: 6777c6fd6e587ac4e8d8e3bcf4dec21f
+      internalID: -787057807
       vertices: []
       indices: 
       edges: []
@@ -248,9 +206,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Untitled-adaaaaaa_0: 917837524
-      Untitled-adaaaaaa_1: -797225339
-      Untitled-adaaaaaa_2: 99315538
+      wda_0: -787057807
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

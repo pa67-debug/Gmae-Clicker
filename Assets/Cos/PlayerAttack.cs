@@ -6,6 +6,8 @@ public class PlayerAttack : MonoBehaviour
     private Animator anim;
 
     public Collider2D attackCollider;
+    public Collider2D clickCollider; // Collider ตัวลูกที่ใช้คลิก
+
     public int damage = 1;
 
     [Header("Auto Attack Settings")]
@@ -23,20 +25,27 @@ public class PlayerAttack : MonoBehaviour
         anim = GetComponent<Animator>();
         attackCollider.enabled = false;
 
-        // โหลดค่าจากเซฟ
-        if (GameManager.Instance != null)
-            GameManager.Instance.LoadGame(this);
+        var gm = GameManager.Instance;
+
+        damage = 1 + gm.weaponLevel;
+        critChance = gm.critChanceLevel * 0.5f;
+        critMultiplier = 2f + gm.critDamageLevel;
+
+        autoAttackInterval = 60f - (gm.speedLevel * 0.5f);
+
+        if (autoAttackInterval < 1f)
+            autoAttackInterval = 1f;
     }
 
     void Update()
     {
-        // กดโจมตีเอง
+        // ตรวจคลิกเมาส์
         if (Input.GetMouseButtonDown(0) && !isAttacking)
         {
-            StartCoroutine(AttackRoutine());
+            CheckClick();
         }
 
-        // ระบบตีอัตโนมัติแบบแม่นยำ
+        // ระบบตีอัตโนมัติ
         autoAttackTimer += Time.deltaTime;
 
         if (autoAttackTimer >= autoAttackInterval)
@@ -45,6 +54,18 @@ public class PlayerAttack : MonoBehaviour
 
             if (!isAttacking)
                 StartCoroutine(AttackRoutine());
+        }
+    }
+
+    void CheckClick()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Collider2D hit = Physics2D.OverlapPoint(mousePos);
+
+        if (hit == clickCollider)
+        {
+            StartCoroutine(AttackRoutine());
         }
     }
 
@@ -64,9 +85,6 @@ public class PlayerAttack : MonoBehaviour
         isAttacking = false;
     }
 
-    // =========================
-    // ⚡ ลดเวลาโจมตีอัตโนมัติ
-    // =========================
     public void ReduceAutoAttackTime(float amount)
     {
         autoAttackInterval -= amount;
@@ -75,9 +93,6 @@ public class PlayerAttack : MonoBehaviour
             autoAttackInterval = 1f;
     }
 
-    // =========================
-    // 💥 ระบบคริติคอล
-    // =========================
     public int GetDamage(out bool isCritical)
     {
         isCritical = false;

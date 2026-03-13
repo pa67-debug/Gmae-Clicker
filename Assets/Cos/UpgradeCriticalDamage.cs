@@ -1,45 +1,47 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
-public class UpgradeCriticalDamage : MonoBehaviour
+public class UpgradeCritDamage : MonoBehaviour
 {
-    public PlayerAttack player;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI priceText;
 
-    private int level = 0;
-    private int price = 1000;
+    public AudioSource audioSource;   // ตัวเล่นเสียง
+    public AudioClip buySound;        // เสียงตอนซื้อ
 
     void Start()
     {
         UpdateUI();
     }
 
-    public void BuyUpgrade()
+    public void Buy()
     {
-        if (GameManager.Instance.SpendCoins(price))
+        var gm = GameManager.Instance;
+
+        if (gm.SpendCoins(gm.critDamagePrice))
         {
-            level++;
+            gm.critDamageLevel++;
+            gm.critDamagePrice =
+                Mathf.CeilToInt(gm.critDamagePrice * 2.5f);
 
-            // �����ç��� +1 ��ҷء����
-            player.critMultiplier += 1f;
+            gm.SaveGameData();
 
-            // �Ҥ� x2.5 ��лѴ���
-            price = Mathf.CeilToInt(price * 2.5f);
+            // 🔊 เล่นเสียงตอนซื้อ
+            audioSource.PlayOneShot(buySound);
 
             UpdateUI();
-        }
-        else
-        {
-            Debug.Log("Not enough gold!");
         }
     }
 
     void UpdateUI()
     {
-        descriptionText.text =
-            "Increase Critical Damage\nCurrent: x" + player.critMultiplier;
+        var gm = GameManager.Instance;
 
-        priceText.text = "Price: " + price + " G";
+        descriptionText.text =
+            "Increase Critical Damage x" +
+            (2f + gm.critDamageLevel);
+
+        priceText.text =
+            "Price: " + gm.critDamagePrice + " G";
     }
 }

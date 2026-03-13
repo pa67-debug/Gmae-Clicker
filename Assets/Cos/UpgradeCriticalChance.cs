@@ -1,46 +1,46 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
-public class UpgradeCriticalChance : MonoBehaviour
+public class UpgradeCritChance : MonoBehaviour
 {
-    public PlayerAttack player;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI priceText;
 
-    private int level = 0;
-    private int price = 300;
-
-    private float increaseAmount = 0.5f; // ������� 0.5%
+    public AudioSource audioSource;   // ตัวเล่นเสียง
+    public AudioClip buySound;        // เสียงตอนซื้อ
 
     void Start()
     {
         UpdateUI();
     }
 
-    public void BuyUpgrade()
+    public void Buy()
     {
-        if (GameManager.Instance.SpendCoins(price))
+        var gm = GameManager.Instance;
+
+        if (gm.SpendCoins(gm.critChancePrice))
         {
-            level++;
+            gm.critChanceLevel++;
+            gm.critChancePrice = Mathf.CeilToInt(gm.critChancePrice * 2.5f);
 
-            player.critChance += increaseAmount;
+            gm.SaveGameData();
 
-            // �ٳ�Ҥ� x2.5 ��лѴ���
-            price = Mathf.CeilToInt(price * 2.5f);
+            // 🔊 เล่นเสียงตอนซื้อ
+            audioSource.PlayOneShot(buySound);
 
             UpdateUI();
-        }
-        else
-        {
-            Debug.Log("Not enough gold!");
         }
     }
 
     void UpdateUI()
     {
-        descriptionText.text =
-            "Increase Critical Chance +" + (level * increaseAmount).ToString("F1") + "%";
+        var gm = GameManager.Instance;
 
-        priceText.text = "Price: " + price + " G";
+        descriptionText.text =
+            "Increase Critical Chance +" +
+            (gm.critChanceLevel * 0.5f).ToString("F1") + "%";
+
+        priceText.text =
+            "Price: " + gm.critChancePrice + " G";
     }
 }

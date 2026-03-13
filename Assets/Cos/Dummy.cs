@@ -3,8 +3,12 @@
 public class Dummy : MonoBehaviour
 {
     [Header("Damage Popup")]
-    public GameObject damagePopupPrefab;   // ใส่ Prefab TextMeshPro (3D)
-    public Transform popupPoint;           // จุดลอยดาเมจเหนือหัว
+    public GameObject damagePopupPrefab;
+    public Transform popupPoint;
+
+    [Header("Hit Sound")]
+    public AudioSource audioSource;   // ตัวเล่นเสียง
+    public AudioClip hitSound;        // เสียงโดนฟัน
 
     private Animator anim;
 
@@ -33,6 +37,10 @@ public class Dummy : MonoBehaviour
     {
         if (anim != null)
             anim.SetTrigger("Hit");
+
+        // 🔊 เล่นเสียงโดนฟัน
+        if (audioSource != null && hitSound != null)
+            audioSource.PlayOneShot(hitSound);
 
         if (GameManager.Instance != null)
             GameManager.Instance.AddCoins(damage);

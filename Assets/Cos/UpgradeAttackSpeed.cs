@@ -1,43 +1,45 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class UpgradeAttackSpeed : MonoBehaviour
 {
-    public PlayerAttack player;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI priceText;
 
-    private int level = 0;
-    private int price = 120;
-
-    private float reduceAmount = 0.5f; // Ŵ���� 0.5 �� ��ͤ���
+    public AudioSource audioSource;   // ตัวเล่นเสียง
+    public AudioClip buySound;        // เสียงตอนซื้อ
 
     void Start()
     {
         UpdateUI();
     }
 
-    public void BuyUpgrade()
+    public void Buy()
     {
-        if (GameManager.Instance.SpendCoins(price))
+        var gm = GameManager.Instance;
+
+        if (gm.SpendCoins(gm.speedPrice))
         {
-            level++;
+            gm.speedLevel++;
+            gm.speedPrice *= 2;
 
-            player.ReduceAutoAttackTime(reduceAmount);
+            gm.SaveGameData();
 
-            price *= 2;
+            // 🔊 เล่นเสียงตอนซื้อ
+            audioSource.PlayOneShot(buySound);
 
             UpdateUI();
-        }
-        else
-        {
-            Debug.Log("Not enough gold!");
         }
     }
 
     void UpdateUI()
     {
-        descriptionText.text = "Increase Attack Speed +" + level;
-        priceText.text = "Price: " + price + " G";
+        var gm = GameManager.Instance;
+
+        descriptionText.text =
+            "Increase Attack Speed +" + gm.speedLevel;
+
+        priceText.text =
+            "Price: " + gm.speedPrice + " G";
     }
 }

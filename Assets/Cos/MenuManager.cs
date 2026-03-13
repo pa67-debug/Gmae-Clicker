@@ -3,20 +3,40 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public void ExitToMenu()
-    {
-        PlayerAttack player = FindObjectOfType<PlayerAttack>();
+    [Header("Button Sounds")]
+    public AudioSource audioSource;
 
-        if (player != null)
-        {
-            GameManager.Instance.SaveGame(player);
-        }
-
-        SceneManager.LoadScene("MainMenu");
-    }
+    public AudioClip menuClickSound;
+    public AudioClip gameClickSound;
 
     public void StartGame()
     {
+        PlayClick(menuClickSound);
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void RestartGame()
+    {
+        PlayClick(gameClickSound);
+
+        // ลบ Save ทั้งหมด
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void ExitToMenu()
+    {
+        PlayClick(gameClickSound);
+
+        GameManager.Instance.SaveGameData();
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    void PlayClick(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+            audioSource.PlayOneShot(clip);
     }
 }

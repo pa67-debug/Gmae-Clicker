@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 98a71d9c729c81547bd6c0434490c00e
+guid: 46a3c71a8c09415409745d749bf62a14
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -175,13 +175,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Untitled-adaaaaaa_0
+      name: Untitled 01-17-2026 01-45-48_0
       rect:
         serializedVersion: 2
-        x: 197
-        y: 477
-        width: 806
-        height: 206
+        x: 380
+        y: 277
+        width: 1227
+        height: 803
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -189,20 +189,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da2b7d644701ea6499d399064dbcb5ee
-      internalID: 917837524
+      spriteID: cb780d80f54702f42bb1b4bc2149ec62
+      internalID: 398322771
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Untitled-adaaaaaa_1
+      name: Untitled 01-17-2026 01-45-48_1
       rect:
         serializedVersion: 2
-        x: 1396
-        y: 575
-        width: 308
-        height: 309
+        x: 1584
+        y: 1040
+        width: 9
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,29 +210,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0855001675178d4397b1fa4e8871743
-      internalID: -797225339
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Untitled-adaaaaaa_2
-      rect:
-        serializedVersion: 2
-        x: 197
-        y: 194
-        width: 806
-        height: 206
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: df09413ec37f4b74bb51c249005eefa8
-      internalID: 99315538
+      spriteID: e1778aa5a31a32a4096262aea73aad10
+      internalID: 831235862
       vertices: []
       indices: 
       edges: []
@@ -248,9 +227,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Untitled-adaaaaaa_0: 917837524
-      Untitled-adaaaaaa_1: -797225339
-      Untitled-adaaaaaa_2: 99315538
+      Untitled 01-17-2026 01-45-48_0: 398322771
+      Untitled 01-17-2026 01-45-48_1: 831235862
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
